@@ -1,0 +1,20 @@
+.site-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: whitesmoke;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 10vh;
+    
+}
+
+
+.navbar a{
+    
+    color: whitesmoke;
+    margin-right: 10px;
+    text-decoration: none;
+
+}
