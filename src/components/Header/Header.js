@@ -1,18 +1,18 @@
-import '../Header/Header.css'
-
+import '../Header/Header.css';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
 return(
     <header className="site-header">
        
-           <span className="blog-title" href="">Architecture & Design Blog</span>
+           <span className="blog-title"><Link className="blog-title" to="/">Architecture & Design Blog</Link></span>
            <nav className="navbar">
-                <a href="">Architecture</a>
-                <a href="">Interior design</a>
-                <a href="">Register</a>
-                <a href="">Login</a>
-                <a href="">Welcome, Pesho</a>
-                <a href="">Search</a>
+                <Link to="/architecture">Architecture</Link>
+                <Link to="/design">Interior design</Link>
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+                <Link to="">Welcome, Pesho</Link>
+                <Link to="/search">Search</Link>
            </nav>
       
 

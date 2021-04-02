@@ -1,7 +1,7 @@
-import '../HomePage/HomePage.css';
+import '../Architecture/Architecture.css';
 import Article from '../Article/Article';
 
-const HomePage = () => {
+const Architecture = () => {
     return(
         <section className="home-articles">
             <h2 className="article-section">Architecture</h2>
@@ -10,12 +10,7 @@ const HomePage = () => {
             <Article/>
             <Article/>
             <Article/>
-            <h2 className="article-section">Interior Design</h2>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
+     
 
             
 
@@ -27,4 +22,4 @@ const HomePage = () => {
 
 }
 
-export default HomePage;
+export default Architecture;
