@@ -5,7 +5,7 @@ const Header = () => {
 return(
     <header className="site-header">
        
-           <span href="">Architecture&Design Blog</span>
+           <span className="blog-title" href="">Architecture & Design Blog</span>
            <nav className="navbar">
                 <a href="">Architecture</a>
                 <a href="">Interior design</a>
