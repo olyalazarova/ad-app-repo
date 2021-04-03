@@ -1,0 +1,22 @@
+.my-profile{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color:lightgray;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: darkslategray;
+   
+}
+
+.add-article-btn{
+    float:right;
+    padding: 10px;
+    background-color: black;
+    color: whitesmoke;
+    font-weight: 700;
+    border: none;
+
+}

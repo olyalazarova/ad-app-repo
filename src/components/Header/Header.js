@@ -11,7 +11,7 @@ return(
                 <Link to="/design">Interior design</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/login">Login</Link>
-                <Link to="">Welcome, Pesho</Link>
+                <Link to="/profile">Welcome, Pesho</Link>
                 <Link to="/search">Search</Link>
            </nav>
       

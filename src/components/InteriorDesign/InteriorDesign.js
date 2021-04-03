@@ -1,7 +1,11 @@
 import '../InteriorDesign/InteriorDesign.css';
 import Article from '../Article/Article';
 
-const InteriorDesign = () => {
+const InteriorDesign = (
+    match,
+    location,
+    history
+) => {
     return(
         <section className="home-articles">
             <h2 className="article-section">Interior Design</h2>
