@@ -1,5 +1,6 @@
 import '../Article/Article.css';
 
+import {Link} from 'react-router-dom';
 
 
 const Article = () =>{
@@ -14,6 +15,12 @@ const Article = () =>{
            <h3>Ivan Petrov</h3>
            <span>March, 31 2021</span>
        </div>
+                 <Link to="/edit">
+                <button className="edit-article-btn">Edit</button>
+                </Link>
+                <Link to="">
+                <button className="delete-article-btn">Delete</button>
+                </Link>
         </article>
 
     );

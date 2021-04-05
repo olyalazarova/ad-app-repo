@@ -1,16 +1,36 @@
-import '../CreateArticle/CreateArticle.css';
-
-import firebase from 'firebase/app';
-
 import { useHistory } from "react-router-dom";
 import {useState} from 'react';
 
-import {auth, firestore} from '../../services/firebaseService';
 
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {useCollectionData} from 'react-firebase-hooks/firestore';
+
+if (!firebase.apps.length) {
+    
+    firebase.initializeApp({
+        apiKey: "AIzaSyCwYhthRDeopyJE0miEVnFY6s6kbsTgIjs",
+        authDomain: "ad-app-react.firebaseapp.com",
+        projectId: "ad-app-react",
+        storageBucket: "ad-app-react.appspot.com",
+        messagingSenderId: "925063237645",
+        appId: "1:925063237645:web:ea7b7acb4823cc1ecdc544",
+        measurementId: "G-EKB08CCZS2"
+    });
+    
+ }else {
+    firebase.app(); // if already initialized, use that one
+ }
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
 const articleRef = firestore.collection('articles');
 
-const CreateArticle = () => {
+
+const EditArticle = () => {
 
     const[title, setTitle] = useState('');
     const[content, setContent] = useState('');
@@ -19,7 +39,7 @@ const CreateArticle = () => {
 
     let history = useHistory();
     
-    const onCreateArticleSubmitHandler = async (e) => {
+    const onEditArticleSubmitHandler = async (e) => {
     
         e.preventDefault();
         console.log(e.target.title.value);
@@ -29,13 +49,13 @@ const CreateArticle = () => {
 
         
 
-        await articleRef.add({
+        await articleRef.doc('').update({
             title: e.target.title.value,
             content: e.target.content.value,
             section: e.target.section.value,
             imageUrl: e.target.imgUrl.value,
             author: "Pesho",
-            dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
+            dateCreated: Date.now(),
         }).then(history.push('/profile'));
 
         setTitle('');
@@ -56,7 +76,7 @@ const CreateArticle = () => {
     return(
 
         <section className="create-article-form">
-            <form onSubmit={onCreateArticleSubmitHandler}>
+            <form onSubmit={onEditArticleSubmitHandler}>
                 <fieldset>
                     <legend>Create article</legend>
                     <p className="field-title">
@@ -127,4 +147,4 @@ const CreateArticle = () => {
 
 }
 
-export default CreateArticle;
+export default EditArticle;

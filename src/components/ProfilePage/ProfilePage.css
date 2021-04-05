@@ -11,12 +11,17 @@
    
 }
 
-.add-article-btn{
+.add-article-btn {
     float:right;
+   
     padding: 10px;
     background-color: black;
     color: whitesmoke;
     font-weight: 700;
     border: none;
+    
+}
 
+.create-btn-container{
+    padding:25px;
 }

@@ -2,12 +2,10 @@
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
 //import firebase from "firebase";
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+//import firebase from 'firebase/app';
+//import 'firebase/firestore';
+//import 'firebase/auth';
 
-import{useAuthState} from 'react-firebase-hooks/auth';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -22,8 +20,9 @@ import CreateArticle from './components/CreateArticle/CreateArticle';
 
 
 function App() {
- // const firebaseApp = firebase.apps[0];
+ //const firebaseApp = firebase.apps[0];
  
+
 
   return (  
   <div className="App">
