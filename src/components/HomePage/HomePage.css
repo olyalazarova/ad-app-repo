@@ -12,3 +12,8 @@
     border-bottom-color: black;
     text-align:left;
 }
+
+.achitecture-section{
+    display: flex;
+    flex-direction: column;
+}
