@@ -1,0 +1,26 @@
+.article-detail-container{
+    width:80%;
+    height: 100%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.author-detail-page{
+    font-size: 16px;
+    font-style: italic;
+    width:80%;
+}
+
+
+
+.article-img{
+    float:left;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.article-detail-body{
+    display: inline;
+    
+}
+

@@ -1,17 +1,74 @@
 import '../Architecture/Architecture.css';
 import Article from '../Article/Article';
 
+import {useState, useEffect} from 'react';
+
+import {auth, firestore} from '../../services/firebaseService';
+
 const Architecture = () => {
+
+    const [articles, setArticles] = useState([]);
+
+    const fetchArticles=async()=>{
+    const response=firestore.collection('articles')
+                  // .orderBy('dateCreated')
+                  // .where('section','==', 'Architecture')
+                  // .limit(3);
+    const data=await response.get();
+           let temp = [];
+             data.docs.forEach(item=>{
+                const itemPush = item.data();
+                itemPush.id = item.id;
+                temp.push(itemPush);
+      })
+   
+      setArticles([...articles,...temp])
+      // setArticles(data.docs);
+     //console.log(articles);
+   }
+   useEffect(() =>{
+     fetchArticles();
+   },[])
+   
+   
+   
+          
+   
+       const architectureArticlesAll = 
+                   articles.filter(x => x.section === 'Architecture');
+                          
     return(
         <section className="home-articles">
             <h2 className="article-section">Architecture</h2>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
-     
+            
+        <section className="achitecture-section">
+           
+           {
+               
+                  architectureArticlesAll.map( article => {
+                       return(
+                        <Article key={article.id}
+                        title={article.title}
+                        author={article.author}
+                       // date={article.dateCreated}
+                        imageUrl={article.imageUrl}
+                        id={article.id}
+                        />
+    
+                       )
+                            
+                           
+                    })
+               
+             
+       
+           }
+               
+               
+                   
+           
 
+       </section>    
             
 
         

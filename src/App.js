@@ -14,8 +14,9 @@ import Architecture from './components/Architecture/Architecture';
 import InteriorDesign from './components/InteriorDesign/InteriorDesign';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import CreateArticle from './components/CreateArticle/CreateArticle';
-
-
+import ArticleDetail from './components/ArticleDetail/ArticleDetail';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
 
 
 
@@ -33,6 +34,9 @@ function App() {
         <Route path="/design" exact component={InteriorDesign}></Route>
         <Route path="/profile" exact component={ProfilePage}></Route>
         <Route path="/create" exact component={CreateArticle}></Route>
+        <Route path="/detail/:articleId" exact component={ArticleDetail}></Route>
+        <Route path="/register" exact component={Register}></Route>
+        <Route path="/login" exact component={Login}></Route>
       </Switch>
       <Footer></Footer>
   </div>

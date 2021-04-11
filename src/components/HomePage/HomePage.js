@@ -44,9 +44,13 @@ const HomePage = () => {
  const data=await response.get();
         let temp = [];
       data.docs.forEach(item=>{
-          temp.push(item.data());
+          const itemPush = item.data();
+          itemPush.id = item.id;
+          temp.push(itemPush);
      
    })
+
+  
 
    setArticles([...articles,...temp])
    // setArticles(data.docs);
@@ -70,7 +74,7 @@ useEffect(() =>{
                         .filter(x => x.section === 'Interior Design')
                         .slice(0,3);
          
-   //  console.log(articles);
+     console.log(articles);
     return(
         
 
@@ -86,8 +90,9 @@ useEffect(() =>{
                          <Article key={article.id}
                          title={article.title}
                          author={article.author}
-                        // date={article.dateCreated}
+                       //  date={article.dateCreated}
                          imageUrl={article.imageUrl}
+                         id={article.id}
                          />
      
                         )
@@ -121,6 +126,7 @@ useEffect(() =>{
                          author={article.author}
                         // date={article.dateCreated}
                          imageUrl={article.imageUrl}
+                         id={article.id}
                          />
      
                         )

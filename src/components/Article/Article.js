@@ -1,23 +1,30 @@
 import '../Article/Article.css';
 
+
+
 import {Link} from 'react-router-dom';
 
 
 const Article = ({
+    
     title,
     author,
     date,
-    imageUrl
+    imageUrl,
+    id
 }) =>{
         
+  
 
     return(
         <article className="article-container">
                 
         <img className="article-img" src={imageUrl} alt="" ></img>
         <div className="article-data">
-           
-           <h2>{title}</h2>
+           <Link to={`/detail/${id}`}>
+                <h2>{title}</h2>
+           </Link>
+          
            <h3>{author}</h3>
            <span>{date}</span>
        </div>
