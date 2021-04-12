@@ -16,8 +16,8 @@ import userEvent from '@testing-library/user-event';
 const Header = () => {
 
    // const {isAuthenticated, email} = useContext(AuthContext);
-   const {isAuthenticated, username} = useContext(AuthContext);
-    console.log(isAuthenticated);
+   const {isAuthenticated, email, username} = useContext(AuthContext);
+   
    
   
 //const [users, setUsers] = useState([]);

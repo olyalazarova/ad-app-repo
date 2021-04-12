@@ -4,20 +4,21 @@ import AuthContext from '../../services/AuthContext';
 
 import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 const ProfilePage = (
     match,
     location,
     history
 ) => {
-    const {isAuthenticated, username} = useContext(AuthContext);
+    const {isAuthenticated, email, username} = useContext(AuthContext);
 
     return(
         <section className="author-articles">
             <div className="my-profile">
                 <h3>My Profile</h3>
-                <p>Name: {}</p>
-                <p>Email: {username}</p>
+                <p>Name: {username}</p>
+                <p>Email: {email}</p>
             </div>
 
             <div className="create-btn-container">

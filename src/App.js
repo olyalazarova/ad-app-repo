@@ -33,12 +33,30 @@ function App() {
     auth.onAuthStateChanged(setUser);
   }, []);
 
+  //var user = auth.currentUser;
+  //var name, email, photoUrl, uid, emailVerified;
+  
+ // if (auth.currentUser != null) {
+ //   name = auth.currentUser.displayName;
+  //  email = auth.currentUser.email;
+  //  photoUrl = user.photoURL;
+   // emailVerified = user.emailVerified;
+  //  uid = auth.currentUser.uid;  
+    
+ // }
+
   const authInfo = {
     isAuthenticated: Boolean(user),
-    username: user?.email,
-    name: user?.name,
+    email: user?.email,
+    username: auth.currentUser?.displayName,
   };
 
+  console.log(authInfo.isAuthenticated);
+  console.log(authInfo.email);
+  console.log(authInfo.username);
+ 
+  
+  
 
   return (  
      

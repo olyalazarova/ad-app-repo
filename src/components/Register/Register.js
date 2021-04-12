@@ -8,55 +8,59 @@ import {useState} from 'react';
 import {auth, firestore} from '../../services/firebaseService';
 
 
-const userRef = firestore.collection('users');
 
-const CreateUser = () => {
+const CreateUser = ({
+    history
+}) => {
+
 
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const[name, setName] = useState('');
    
 
-    let history = useHistory();
+   // let history = useHistory();
     
     const onCreateUserSubmitHandler = async (e) => {
-    
         e.preventDefault();
-    //    console.log(e.target.email.value);
-    //    console.log(e.target.password.value);
-    //    console.log(e.target.name.value);
-        
 
-    const username = e.target.email.value;
-    const password = e.target.password.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const author = e.target.name.value;
+       
 
-    auth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
             console.log('Register');
-           // history.push('/');
-        });
-
-       await userRef.add({
-           email: e.target.email.value,
-            password: e.target.password.value,
-            name: e.target.name.value,
+          
+            userCredential.user.updateProfile({
+                displayName: author
+            }).then(function(){
+                // Profile updated successfully!
+                // "Jane Q. User"
+               // var displayName = user.displayName;
+                // "https://example.com/jane-q-user/profile.jpg"
+                //var photoURL = user.photoURL;
+                //console.log(displayName);
+            })
             
-        }).then(history.push('/login'));
+        });
+      
+       
 
-        setEmail('');
-        setPassword('');
-        setName('');
-       
-       
+
+            setEmail('');
+            setPassword('');
+            setName('');
+
        
     }
-
-      //  let history = useHistory();
-
-      //  function handleClick() {
-      //  history.push("/profile");
-      //  }
-
+    
+        
+ 
+       
+       
+    
 
     return(
 
