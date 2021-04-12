@@ -22,15 +22,22 @@ const CreateUser = () => {
     const onCreateUserSubmitHandler = async (e) => {
     
         e.preventDefault();
-        console.log(e.target.email.value);
-        console.log(e.target.password.value);
-        console.log(e.target.name.value);
+    //    console.log(e.target.email.value);
+    //    console.log(e.target.password.value);
+    //    console.log(e.target.name.value);
         
 
-        
+    const username = e.target.email.value;
+    const password = e.target.password.value;
 
-        await userRef.add({
-            email: e.target.email.value,
+    auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            console.log('Register');
+           // history.push('/');
+        });
+
+       await userRef.add({
+           email: e.target.email.value,
             password: e.target.password.value,
             name: e.target.name.value,
             
@@ -60,7 +67,7 @@ const CreateUser = () => {
                     <p className="field-email">
                         <label htmlFor="email">Email </label>
                         <span className="input">
-                            <input type="text" 
+                            <input type="email" 
                                     name="email" 
                                    
                                     placeholder="email"
@@ -75,7 +82,7 @@ const CreateUser = () => {
                     <p className="field-password">
                         <label htmlFor="password">Password </label>
                         <span className="input">
-                            <input type="text" 
+                            <input type="password" 
                                     name="password" 
                                    
                                     placeholder="password"

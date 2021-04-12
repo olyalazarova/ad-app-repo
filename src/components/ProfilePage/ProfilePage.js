@@ -1,6 +1,8 @@
 import '../ProfilePage/ProfilePage.css';
 import Article from '../Article/Article';
+import AuthContext from '../../services/AuthContext';
 
+import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 const ProfilePage = (
@@ -8,12 +10,14 @@ const ProfilePage = (
     location,
     history
 ) => {
+    const {isAuthenticated, username} = useContext(AuthContext);
+
     return(
         <section className="author-articles">
             <div className="my-profile">
                 <h3>My Profile</h3>
-                <p>Name: PETAR PETROV</p>
-                <p>Email: petrov@abv.bg</p>
+                <p>Name: {}</p>
+                <p>Email: {username}</p>
             </div>
 
             <div className="create-btn-container">

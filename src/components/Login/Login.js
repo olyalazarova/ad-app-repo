@@ -1,55 +1,60 @@
 import '../Login/Login.css';
+import '../../services/firebaseService';
+
+import AuthContext from '../../services/AuthContext';
 
 import firebase from 'firebase/app';
 
 import { useHistory } from "react-router-dom";
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 
 import {auth, firestore} from '../../services/firebaseService';
 
 
 const userRef = firestore.collection('users');
 
-const LoginUser = () => {
+const LoginUser = ({
+    history
+}) => {
+
 
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
+    const [error, setErrors] = useState("");
     
+
+ //   let history = useHistory();
+    //  const Auth = useContext(AuthContext);
    
-
-    let history = useHistory();
+   // const [isLoggedIn, setLoggedIn] = useState();
     
+
     const onLoginUserSubmitHandler = async (e) => {
-    
         e.preventDefault();
-        console.log(e.target.email.value);
-        console.log(e.target.password.value);
-       
-        
+        const email = e.target.email.value;
+        const password = e.target.password.value;
 
-        
-
-        await userRef.add({
-            email: e.target.email.value,
-            password: e.target.password.value,
-            name: e.target.name.value,
+      
+        auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            history.push('/');
             
-        }).then(history.push('/login'));
+            
+        });
+
+          
+   //     await userRef.add({
+   //         email: e.target.email.value,
+    //        password: e.target.password.value,
+   //         name: e.target.name.value,
+            
+    //    }).then(history.push('/login'));
 
         setEmail('');
         setPassword('');
-      
-       
-       
+        
        
     }
-
-      //  let history = useHistory();
-
-      //  function handleClick() {
-      //  history.push("/profile");
-      //  }
-
 
     return(
 
@@ -60,7 +65,7 @@ const LoginUser = () => {
                     <p className="field-email">
                         <label htmlFor="email">Email </label>
                         <span className="input">
-                            <input type="text" 
+                            <input type="email" 
                                     name="email" 
                                    
                                     placeholder="email"
@@ -75,7 +80,7 @@ const LoginUser = () => {
                     <p className="field-password">
                         <label htmlFor="password">Password </label>
                         <span className="input">
-                            <input type="text" 
+                            <input type="password" 
                                     name="password" 
                                    
                                     placeholder="password"
@@ -89,6 +94,7 @@ const LoginUser = () => {
               
                     
                     <input className="button submit" type="submit" value="Login" />
+                    <span>{error}</span>
                 </fieldset>
             </form>
 

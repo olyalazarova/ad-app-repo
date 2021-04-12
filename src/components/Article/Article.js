@@ -1,6 +1,8 @@
 import '../Article/Article.css';
 
+import AuthContext from '../../services/AuthContext';
 
+import {useState, useEffect, useContext} from 'react';
 
 import {Link} from 'react-router-dom';
 
@@ -14,7 +16,7 @@ const Article = ({
     id
 }) =>{
         
-  
+    const {isAuthenticated, username} = useContext(AuthContext);
 
     return(
         <article className="article-container">
@@ -28,12 +30,13 @@ const Article = ({
            <h3>{author}</h3>
            <span>{date}</span>
        </div>
-                 <Link to="/edit">
+        
+        {isAuthenticated && <Link to="/edit">
                 <button className="edit-article-btn">Edit</button>
-                </Link>
-                <Link to="">
+                </Link>}
+        {isAuthenticated && <Link to="">
                 <button className="delete-article-btn">Delete</button>
-                </Link>
+                </Link>}
         </article>
 
     );

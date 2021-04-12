@@ -1,6 +1,10 @@
 //import logo from './logo.svg';
-import {Route, Switch} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import {Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
+import {auth} from './services/firebaseService';
+import AuthContext from './services/AuthContext';
+
 //import firebase from "firebase";
 //import firebase from 'firebase/app';
 //import 'firebase/firestore';
@@ -23,10 +27,23 @@ import Login from './components/Login/Login';
 function App() {
  //const firebaseApp = firebase.apps[0];
  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(setUser);
+  }, []);
+
+  const authInfo = {
+    isAuthenticated: Boolean(user),
+    username: user?.email,
+    name: user?.name,
+  };
 
 
   return (  
+     
   <div className="App">
+      <AuthContext.Provider value={authInfo}>
       <Header></Header>
       <Switch>
         <Route path="/" exact component={HomePage}></Route>
@@ -37,8 +54,14 @@ function App() {
         <Route path="/detail/:articleId" exact component={ArticleDetail}></Route>
         <Route path="/register" exact component={Register}></Route>
         <Route path="/login" exact component={Login}></Route>
+        <Route path="/logout" render={() => {
+              auth.signOut();
+              return <Redirect to="/" />
+            }} />
+        
       </Switch>
       <Footer></Footer>
+      </AuthContext.Provider>
   </div>
       
   );
