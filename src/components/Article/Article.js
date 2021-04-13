@@ -3,11 +3,15 @@ import '../Article/Article.css';
 import AuthContext from '../../services/AuthContext';
 
 import {useState, useEffect, useContext} from 'react';
+import { useHistory } from "react-router-dom";
 
 import {Link} from 'react-router-dom';
 
+import {auth, firestore} from '../../services/firebaseService';
 
-const Article = ({
+const articleRef = firestore.collection('articles');
+
+const Article = ( {
     
     title,
     author,
@@ -15,8 +19,27 @@ const Article = ({
     imageUrl,
     id
 }) =>{
-        
+        console.log(id);
+
     const {isAuthenticated, username} = useContext(AuthContext);
+
+    //const currentArticleId = id;
+
+    let history = useHistory();
+   
+    
+    const onDeleteArticleSubmitHandler = async (e) => {
+    
+        e.preventDefault();
+      
+
+
+        await articleRef.doc(id).delete()
+            .then(history.push('/profile'));
+
+      
+    }
+
 
     return(
         <article className="article-container">
@@ -31,11 +54,11 @@ const Article = ({
            <span>{date}</span>
        </div>
         
-        {isAuthenticated && <Link to="/edit">
+        {isAuthenticated && <Link to={`/edit/${id}`}>
                 <button className="edit-article-btn">Edit</button>
                 </Link>}
         {isAuthenticated && <Link to="">
-                <button className="delete-article-btn">Delete</button>
+                <button onClick={onDeleteArticleSubmitHandler} className="delete-article-btn">Delete</button>
                 </Link>}
         </article>
 

@@ -1,43 +1,61 @@
 import { useHistory } from "react-router-dom";
-import {useState} from 'react';
 
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-import {useAuthState} from 'react-firebase-hooks/auth';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
+import {useState, useEffect, useContext} from 'react';
 
-if (!firebase.apps.length) {
-    
-    firebase.initializeApp({
-        apiKey: "AIzaSyCwYhthRDeopyJE0miEVnFY6s6kbsTgIjs",
-        authDomain: "ad-app-react.firebaseapp.com",
-        projectId: "ad-app-react",
-        storageBucket: "ad-app-react.appspot.com",
-        messagingSenderId: "925063237645",
-        appId: "1:925063237645:web:ea7b7acb4823cc1ecdc544",
-        measurementId: "G-EKB08CCZS2"
-    });
-    
- }else {
-    firebase.app(); // if already initialized, use that one
- }
+import {auth, firestore} from '../../services/firebaseService';
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
 const articleRef = firestore.collection('articles');
 
 
-const EditArticle = () => {
+const EditArticle = ({
+    match
+}) => {
 
+    let history = useHistory();
+
+    const currentArticleId = match.params.articleId;
+
+    const [articles, setArticles] = useState([]);
     const[title, setTitle] = useState('');
     const[content, setContent] = useState('');
     const[section, setSection] = useState('');
     const[imgUrl, setImgUrl] = useState('');
 
-    let history = useHistory();
+    const fetchArticles=async()=>{
+        const response=firestore.collection('articles').doc(currentArticleId).get()
+        .then((doc) => {
+            if (doc.exists) {
+                const article = doc.data();
+                setTitle(article.title);
+                setContent(article.content);
+                setSection(article.section);
+                setImgUrl(article.imageUrl);
+
+               // console.log("Document data:", doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+              
+    
+ 
+ 
+}
+
+useEffect(() =>{
+    fetchArticles();
+  },[])
+
+
+   
     
     const onEditArticleSubmitHandler = async (e) => {
     
@@ -49,28 +67,30 @@ const EditArticle = () => {
 
         
 
-        await articleRef.doc('').update({
+
+      
+
+
+                
+ 
+ 
+
+ 
+
+
+
+        await articleRef.doc(currentArticleId).update({
             title: e.target.title.value,
             content: e.target.content.value,
             section: e.target.section.value,
             imageUrl: e.target.imgUrl.value,
-            author: "Pesho",
-            dateCreated: Date.now(),
+            //author: "Pesho",
+           // dateCreated: Date.now(),
         }).then(history.push('/profile'));
 
-        setTitle('');
-        setContent('');
-        setImgUrl('');
-        setSection('');
-       
-        //setFormValue('');
+      
     }
 
-      //  let history = useHistory();
-
-      //  function handleClick() {
-      //  history.push("/profile");
-      //  }
 
 
     return(
@@ -78,7 +98,7 @@ const EditArticle = () => {
         <section className="create-article-form">
             <form onSubmit={onEditArticleSubmitHandler}>
                 <fieldset>
-                    <legend>Create article</legend>
+                    <legend>Edit article</legend>
                     <p className="field-title">
                         <label htmlFor="title">Title </label>
                         <span className="input">
@@ -137,7 +157,7 @@ const EditArticle = () => {
                             <span className="actions"></span>
                         </span>
                     </p>
-                    <input className="button submit" type="submit" value="Add Article" />
+                    <input className="button submit" type="submit" value="Save" />
 
                 </fieldset>
             </form>

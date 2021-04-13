@@ -7,6 +7,8 @@ import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
+
+
 const ProfilePage = (
     match,
     location,
@@ -39,11 +41,15 @@ const ProfilePage = (
    useEffect(() =>{
      fetchArticles();
    },[])
+
+
    
    const userArticles = 
    articles.sort((a, b) => b.dateCreated - a.dateCreated)
            .filter(x => x.creatorId === id)
+      
            
+  
 
     return(
         <section className="author-articles">
