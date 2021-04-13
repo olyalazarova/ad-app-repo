@@ -1,9 +1,10 @@
 import '../CreateArticle/CreateArticle.css';
+import AuthContext from '../../services/AuthContext';
 
 import firebase from 'firebase/app';
 
 import { useHistory } from "react-router-dom";
-import {useState} from 'react';
+import {useState, useEffect, useContext} from 'react';
 
 import {auth, firestore} from '../../services/firebaseService';
 
@@ -11,6 +12,7 @@ import {auth, firestore} from '../../services/firebaseService';
 const articleRef = firestore.collection('articles');
 
 const CreateArticle = () => {
+    const {isAuthenticated, email, username,id} = useContext(AuthContext);
 
     const[title, setTitle] = useState('');
     const[content, setContent] = useState('');
@@ -21,6 +23,8 @@ const CreateArticle = () => {
     
     const onCreateArticleSubmitHandler = async (e) => {
     
+        
+
         e.preventDefault();
         console.log(e.target.title.value);
         console.log(e.target.content.value);
@@ -34,8 +38,9 @@ const CreateArticle = () => {
             content: e.target.content.value,
             section: e.target.section.value,
             imageUrl: e.target.imgUrl.value,
-            author: "Pesho",
+            author: username,
             dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
+            creatorId: id
         }).then(history.push('/profile'));
 
         setTitle('');

@@ -49,12 +49,13 @@ function App() {
     isAuthenticated: Boolean(user),
     email: user?.email,
     username: auth.currentUser?.displayName,
+    id: auth.currentUser?.uid
   };
 
   console.log(authInfo.isAuthenticated);
   console.log(authInfo.email);
   console.log(authInfo.username);
- 
+  console.log(authInfo.id);
   
   
 

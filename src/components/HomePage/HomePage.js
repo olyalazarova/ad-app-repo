@@ -90,7 +90,7 @@ useEffect(() =>{
                          <Article key={article.id}
                          title={article.title}
                          author={article.author}
-                       //  date={article.dateCreated}
+                         // date={new Date(article.dateCreated)}
                          imageUrl={article.imageUrl}
                          id={article.id}
                          />
