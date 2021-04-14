@@ -23,6 +23,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import EditArticle from "./components/EditArticle/EditArticle";
 import Article from "./components/Article/Article";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 
 
@@ -70,10 +71,10 @@ function App() {
         <Route path="/" exact component={HomePage}></Route>
         <Route path="/architecture" exact component={Architecture}></Route>
         <Route path="/design" exact component={InteriorDesign}></Route>
+        <Route path="/search" exact component={SearchPage}></Route>
         <Route path="/profile" exact component={ProfilePage}></Route>
         <Route path="/create" exact component={CreateArticle}></Route>
-        <Route path="/edit/:articleId" exact component={EditArticle}></Route>
-      
+        <Route path="/edit/:articleId" exact component={EditArticle}></Route>     
         <Route path="/detail/:articleId" exact component={ArticleDetail}></Route>
         <Route path="/register" exact component={Register}></Route>
         <Route path="/login" exact component={Login}></Route>

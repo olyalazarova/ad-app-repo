@@ -3,7 +3,7 @@ import '../Footer/Footer.css'
 const Footer = () => {
     return(
        <footer className="site-footer">
-           <span>&copy; SoftUni React Project Mart 2021, OL</span>
+           <span>&copy; SoftUni React Project March 2021, OL</span>
        </footer>
     );
 }

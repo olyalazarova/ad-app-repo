@@ -90,7 +90,7 @@ useEffect(() =>{
                          <Article key={article.id}
                          title={article.title}
                          author={article.author}
-                         // date={new Date(article.dateCreated)}
+                         date={new Date(article.dateCreated.seconds*1000).toLocaleDateString("en-US")}
                          imageUrl={article.imageUrl}
                          id={article.id}
                          />
@@ -124,7 +124,7 @@ useEffect(() =>{
                          <Article key={article.id}
                          title={article.title}
                          author={article.author}
-                        // date={article.dateCreated}
+                      //   date={new Date(article.dateCreated.seconds*1000).toLocaleDateString("en-US")}
                          imageUrl={article.imageUrl}
                          id={article.id}
                          />
