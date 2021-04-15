@@ -6,17 +6,19 @@ import {auth, firestore} from '../../services/firebaseService';
 import {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { useHistory } from "react-router-dom";
 
-
+const articleRef = firestore.collection('articles');
 
 const ProfilePage = (
     match,
     location,
-    history
+   // history
 ) => {
     const {isAuthenticated, email, username, id} = useContext(AuthContext);
 
     const [articles, setArticles] = useState([]);
+    const[currentArtcile, setCurrentAricle] = useState({});
 
     const fetchArticles=async()=>{
     const response=firestore.collection('articles')
@@ -37,18 +39,40 @@ const ProfilePage = (
       setArticles([...articles,...temp])
       // setArticles(data.docs);
      //console.log(articles);
+
+       
    }
    useEffect(() =>{
      fetchArticles();
    },[])
 
 
-   
    const userArticles = 
    articles.sort((a, b) => b.dateCreated - a.dateCreated)
-           .filter(x => x.creatorId === id)
+   .filter(x => x.creatorId === id)
+  
+   
+  
       
+          let history = useHistory();
+   
+         
+                
+            
+                const onDeleteArticleSubmitHandler = async (e, artId) => {
            
+                    e.preventDefault();
+                  
+                    console.log(`Delete ${artId}`);
+            
+                    await articleRef.doc(artId).delete()
+                        .then(history.push('/profile'));
+            
+                  
+                    }      
+            
+           
+
   
 
     return(
@@ -65,34 +89,43 @@ const ProfilePage = (
                 </Link>
             </div>
             
-            <div >
+       
             <h2 className="article-section">My Articles</h2>   
-
-              {
+            {
+                 userArticles.map( article => {
+                    return(
+                        <article className="article-container" key={article.id}>
                 
-                   userArticles.map( article => {
-                        return(
-                         <Article key={article.id}
-                         title={article.title}
-                         author={article.author}
-                         date={new Date(article.dateCreated.seconds*1000).toLocaleDateString("en-US")}
-                         imageUrl={article.imageUrl}
-                         id={article.id}
-                         />
-     
-                        )
+                        <img className="article-img" src={article.imageUrl} alt="" ></img>
+                        <div className="article-data">
+                        <Link to={`/detail/${article.id}`}>
+                            <h2>{article.title}</h2>
+                        </Link>
+                  
+                        <h3>{article.author}</h3>
+                        <span>{new Date(article.dateCreated.seconds*1000).toLocaleDateString("en-US")}</span>
+                        </div>
+                
+                        {isAuthenticated && <Link to={`/edit/${article.id}`}>
+                                 <button className="edit-article-btn">Edit</button>
+                                 </Link>}
+                                    {isAuthenticated && <Link to="">
+                                 <button onClick={(e) => onDeleteArticleSubmitHandler(e,article.id)} 
+                                   
+                                    className="delete-article-btn">Delete</button>
+                                 </Link>}
+        
+        
+                </article>
+                
+                )
                              
                             
-                     })
-                
-              
-        
-            }
-                     
-             
+            })
 
-            </div>
-       
+           
+        }
+          
      
 
             

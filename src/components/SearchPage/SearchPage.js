@@ -9,7 +9,7 @@ import {auth, firestore} from '../../services/firebaseService';
 const SearchPage =(props) => {
         const[keyword,setKeyword]=useState('');
         const [articles, setArticles] = useState([]);
-       
+        const [articlesFiltered, setArticlesFiltered] = useState([]);
 
     const fetchArticles=async()=>{
     const response=firestore.collection('articles')
@@ -42,29 +42,22 @@ const SearchPage =(props) => {
 
    console.log(input)
 
-   
-
-                  
-
-   };
-
    const articlesFiltered = 
     articles.filter(x => //x.author.toLowerCase().includes(input.toLowerCase()) ||
                     x.content.toLowerCase().includes(keyword.toLowerCase())
                    // || x.title.toLowerCase().includes(input.toLowerCase())
     );
 
-console.log(articlesFiltered);   
+    setArticlesFiltered(articlesFiltered);
+
+    console.log(articlesFiltered);   
    
-   
+
+                  
+
+   };
 
 
-
-
-  
-  
-  
-   
 
     return(
         <div>
@@ -99,7 +92,7 @@ console.log(articlesFiltered);
                 
                 articlesFiltered.map( article => {
 
-                    if(article){
+                   
                         return(
                         <Article key={article.id}
                         title={article.title}
@@ -113,11 +106,14 @@ console.log(articlesFiltered);
                                       
                     
 
-                    }
+                    
 
-                    return <p>No result</p>
+                    
                         
-                })     
+                }) 
+                   // return <p>No result</p>
+                
+                
                         
     }
          

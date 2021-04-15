@@ -25,20 +25,7 @@ const Article = ( {
 
     //const currentArticleId = id;
 
-    let history = useHistory();
    
-    
-    const onDeleteArticleSubmitHandler = async (e) => {
-    
-        e.preventDefault();
-      
-
-
-        await articleRef.doc(id).delete()
-            .then(history.push('/profile'));
-
-      
-    }
 
 
     return(
@@ -54,12 +41,7 @@ const Article = ( {
            <span>{date}</span>
        </div>
         
-        {isAuthenticated && <Link to={`/edit/${id}`}>
-                <button className="edit-article-btn">Edit</button>
-                </Link>}
-        {isAuthenticated && <Link to="">
-                <button onClick={onDeleteArticleSubmitHandler} className="delete-article-btn">Delete</button>
-                </Link>}
+      
         </article>
 
     );
